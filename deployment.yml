@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy
+  labels:
+    app: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       app: my-app
+  template:
+    metadata:
+      labels:
+       app: my-app
+    spec:
+       containers: 
+       - name: test
+         image: kampemahender/petshop
+         ports:
+         - containerPort: 8080
+         volumeMounts: 
+         - name: vol
+           mountPath: /usr/local/tomcat/webapps/
+       volumes:     
+       - name: vol
+         hostPath: 
+           path: /root/mahi/

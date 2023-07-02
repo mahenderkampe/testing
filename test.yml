@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: cont1
+   labels:
+     app: my-app
+spec: 
+   containers:
+     - name: vamsi
+       image: kampemahender/petshop
+       ports: 
+         - containerPort: 8080   
