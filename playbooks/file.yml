@@ -1,0 +1,13 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+    - name: creat file
+      file:
+        path: /root/file
+        state: touch
+    - name: change permission
+      file:
+        path: /root/file
+        mode: 776      

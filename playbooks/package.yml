@@ -1,0 +1,9 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+    - name: install maven
+      yum:
+        name: maven
+        state: absent

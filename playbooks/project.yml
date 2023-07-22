@@ -1,0 +1,44 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+    - name: install git
+      yum:
+        name: git
+        state: present
+      tags: installgit
+    - name: install maven
+      yum:
+        name: maven
+        state: present
+      tags: installmaven
+    - name: tomcat directory create
+      file:
+        path: /opt/tomcat
+        state: directory
+      tags: tomcatdirectory
+    - name: install tomcat
+      unarchive:
+        src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.11/bin/apache-tomcat-10.1.11.tar.gz
+        dest: /opt/tomcat
+        remote_src: yes
+      tags: installtomcat
+    - name: clone a github repository
+      git:
+        repo: https://github.com/kampemahender122/testing.git
+        dest: /opt/mahi
+        clone: yes
+        update: yes
+      tags: clone
+    - name:  build maven
+      command: mvn -f /opt/mahi/pom.xml clean package
+      tags: build
+    - name: deploy to tomcat
+      shell: cp /opt/mahi/target/*.war /opt/tomcat/apache-tomcat-10.1.11/webapps/ROOT.war
+      tags: deploy
+    - name: tomcat run
+      shell: ./startup.sh
+      args:
+        chdir: /opt/tomcat/apache-tomcat-10.1.11/bin
+      tags: tomcatrun

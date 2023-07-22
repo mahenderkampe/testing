@@ -1,0 +1,8 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+    - name: deploy to tomcat
+      shell: cp /opt/mahi/target/*.war /opt/tomcat/apache-tomcat-10.1.11/webapps/ROOT.war 
+

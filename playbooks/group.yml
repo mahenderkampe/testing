@@ -1,0 +1,12 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+    - name: create group
+      group:
+        name: test
+    - name: user create
+      user:
+        name: user1
+        

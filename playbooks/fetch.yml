@@ -1,0 +1,9 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+    - name: files copy remote to local
+      fetch:
+        src: /root/babu
+        dest: /root/test/

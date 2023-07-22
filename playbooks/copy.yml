@@ -1,0 +1,11 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+    - name: remote file from local
+      copy:
+        dest: /root/mahi
+        content: hi this is ansible class hi how are you
+
+        
